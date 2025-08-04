@@ -21,6 +21,8 @@ file(GLOB IMGUI_SOURCES
 	${TABLES_SOURCE}
 )
 
+list(APPEND IMGUI_SOURCES imgui/imgui_assert_handler.cpp)
+
 set(IMGUI_STATIC "no" CACHE STRING "Build as a static library")
 set(IMGUI_FREETYPE "no" CACHE STRING "Build with freetype library")
 set(IMGUI_LIBRARIES )
