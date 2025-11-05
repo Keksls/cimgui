@@ -34,6 +34,12 @@ typedef unsigned __int64 ImU64;
 //typedef unsigned long long ImU64;
 #endif
 
+#ifndef CIMGUI_DEFINE_ENUMS_AND_STRUCTS
+#ifdef IMGUI_ENABLE_FREETYPE
+#include "./imgui/misc/freetype/imgui_freetype.h"
+#endif
+#endif
+
 
 #ifdef CIMGUI_DEFINE_ENUMS_AND_STRUCTS
 #include "imgui_structs.h"
@@ -46,10 +52,8 @@ typedef union SDL_Event SDL_Event;
 #include "auto_funcs.h"
 
 /////////////////////////hand written functions
-//no LogTextV
-CIMGUI_API void igLogText(const char *fmt, ...);
 //no appendfV
-CIMGUI_API void ImGuiTextBuffer_appendf(struct ImGuiTextBuffer *buffer, const char *fmt, ...);
+CIMGUI_API void ImGuiTextBuffer_appendf(ImGuiTextBuffer *self, const char *fmt, ...);
 //for getting FLT_MAX in bindings
 CIMGUI_API float igGET_FLT_MAX(void);
 //for getting FLT_MIN in bindings

@@ -56,12 +56,18 @@ ImSpan_end	2
 ImSpan_set	2
 1	void	ImSpan_set_Int (T*,int)
 2	void	ImSpan_set_TPtr (T*,T*)
+ImTextureRef_ImTextureRef	2
+1	nil	ImTextureRef_ImTextureRef_Nil ()
+2	nil	ImTextureRef_ImTextureRef_TextureID (ImTextureID)
 ImVec1_ImVec1	2
 1	nil	ImVec1_ImVec1_Nil ()
 2	nil	ImVec1_ImVec1_Float (float)
 ImVec2_ImVec2	2
 1	nil	ImVec2_ImVec2_Nil ()
 2	nil	ImVec2_ImVec2_Float (float,float)
+ImVec2i_ImVec2i	2
+1	nil	ImVec2i_ImVec2i_Nil ()
+2	nil	ImVec2i_ImVec2i_Int (int,int)
 ImVec2ih_ImVec2ih	3
 1	nil	ImVec2ih_ImVec2ih_Nil ()
 2	nil	ImVec2ih_ImVec2ih_short (short,short)
@@ -108,13 +114,17 @@ igCombo	3
 1	bool	igCombo_Str_arr (const char*,int*,const char* const[],int,int)
 2	bool	igCombo_Str (const char*,int*,const char*,int)
 3	bool	igCombo_FnStrPtr (const char*,int*,const char*(*)(void*,int),void*,int,int)
+igGetBackgroundDrawList	2
+1	ImDrawList*	igGetBackgroundDrawList_Nil ()
+2	ImDrawList*	igGetBackgroundDrawList_ViewportPtr (ImGuiViewport*)
 igGetColorU32	3
 1	ImU32	igGetColorU32_Col (ImGuiCol,float)
 2	ImU32	igGetColorU32_Vec4 (const ImVec4)
 3	ImU32	igGetColorU32_U32 (ImU32,float)
-igGetForegroundDrawList	2
-1	ImDrawList*	igGetForegroundDrawList_ViewportPtr (ImGuiViewport*)
+igGetForegroundDrawList	3
+1	ImDrawList*	igGetForegroundDrawList_Nil ()
 2	ImDrawList*	igGetForegroundDrawList_WindowPtr (ImGuiWindow*)
+3	ImDrawList*	igGetForegroundDrawList_ViewportPtr (ImGuiViewport*)
 igGetID	4
 1	ImGuiID	igGetID_Str (const char*)
 2	ImGuiID	igGetID_StrStr (const char*,const char*)
@@ -123,9 +133,15 @@ igGetID	4
 igGetIDWithSeed	2
 1	ImGuiID	igGetIDWithSeed_Str (const char*,const char*,ImGuiID)
 2	ImGuiID	igGetIDWithSeed_Int (int,ImGuiID)
+igGetIO	2
+1	ImGuiIO*	igGetIO_Nil ()
+2	ImGuiIO*	igGetIO_ContextPtr (ImGuiContext*)
 igGetKeyData	2
 1	ImGuiKeyData*	igGetKeyData_ContextPtr (ImGuiContext*,ImGuiKey)
 2	ImGuiKeyData*	igGetKeyData_Key (ImGuiKey)
+igGetPlatformIO	2
+1	ImGuiPlatformIO*	igGetPlatformIO_Nil ()
+2	ImGuiPlatformIO*	igGetPlatformIO_ContextPtr (ImGuiContext*)
 igImAbs	3
 1	int	igImAbs_Int (int)
 2	float	igImAbs_Float (float)
@@ -293,4 +309,4 @@ igValue	4
 2	void	igValue_Int (const char*,int)
 3	void	igValue_Uint (const char*,unsigned int)
 4	void	igValue_Float (const char*,float,const char*)
-205 overloaded
+216 overloaded
