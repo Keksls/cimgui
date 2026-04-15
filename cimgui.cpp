@@ -2,6 +2,7 @@
 //based on imgui.h file version "1.92.7" 19270 from Dear ImGui https://github.com/ocornut/imgui
 //with imgui_internal.h api
 //with imgui_freetype.h api
+//docking branch
 
 #include "./imgui/imgui.h"
 #include "./imgui/imgui_internal.h"
@@ -280,15 +281,11 @@ CIMGUI_API ImDrawList* igGetWindowDrawList()
 {
     return ImGui::GetWindowDrawList();
 }
-<<<<<<< ours
-CIMGUI_API void igGetWindowPos(ImVec2 *pOut)
-=======
 CIMGUI_API float igGetWindowDpiScale()
 {
     return ImGui::GetWindowDpiScale();
 }
 CIMGUI_API ImVec2_c igGetWindowPos()
->>>>>>> theirs
 {
     return ConvertFromCPP_ImVec2(ImGui::GetWindowPos());
 }
@@ -304,15 +301,11 @@ CIMGUI_API float igGetWindowHeight()
 {
     return ImGui::GetWindowHeight();
 }
-<<<<<<< ours
-CIMGUI_API void igSetNextWindowPos(const ImVec2 pos,ImGuiCond cond,const ImVec2 pivot)
-=======
 CIMGUI_API ImGuiViewport* igGetWindowViewport()
 {
     return ImGui::GetWindowViewport();
 }
 CIMGUI_API void igSetNextWindowPos(const ImVec2_c pos,ImGuiCond cond,const ImVec2_c pivot)
->>>>>>> theirs
 {
     return ImGui::SetNextWindowPos(ConvertToCPP_ImVec2(pos),cond,ConvertToCPP_ImVec2(pivot));
 }
@@ -344,15 +337,11 @@ CIMGUI_API void igSetNextWindowBgAlpha(float alpha)
 {
     return ImGui::SetNextWindowBgAlpha(alpha);
 }
-<<<<<<< ours
-CIMGUI_API void igSetWindowPos_Vec2(const ImVec2 pos,ImGuiCond cond)
-=======
 CIMGUI_API void igSetNextWindowViewport(ImGuiID viewport_id)
 {
     return ImGui::SetNextWindowViewport(viewport_id);
 }
 CIMGUI_API void igSetWindowPos_Vec2(const ImVec2_c pos,ImGuiCond cond)
->>>>>>> theirs
 {
     return ImGui::SetWindowPos(ConvertToCPP_ImVec2(pos),cond);
 }
@@ -1480,8 +1469,6 @@ CIMGUI_API void igSetTabItemClosed(const char* tab_or_docked_window_label)
 {
     return ImGui::SetTabItemClosed(tab_or_docked_window_label);
 }
-<<<<<<< ours
-=======
 CIMGUI_API ImGuiID igDockSpace(ImGuiID dockspace_id,const ImVec2_c size,ImGuiDockNodeFlags flags,const ImGuiWindowClass* window_class)
 {
     return ImGui::DockSpace(dockspace_id,ConvertToCPP_ImVec2(size),flags,window_class);
@@ -1506,7 +1493,6 @@ CIMGUI_API bool igIsWindowDocked()
 {
     return ImGui::IsWindowDocked();
 }
->>>>>>> theirs
 CIMGUI_API void igLogToTTY(int auto_open_depth)
 {
     return ImGui::LogToTTY(auto_open_depth);
@@ -1680,13 +1666,13 @@ CIMGUI_API ImGuiViewport* igGetMainViewport()
 {
     return ImGui::GetMainViewport();
 }
-CIMGUI_API ImDrawList* igGetBackgroundDrawList_Nil()
+CIMGUI_API ImDrawList* igGetBackgroundDrawList(ImGuiViewport* viewport)
 {
-    return ImGui::GetBackgroundDrawList();
+    return ImGui::GetBackgroundDrawList(viewport);
 }
-CIMGUI_API ImDrawList* igGetForegroundDrawList_Nil()
+CIMGUI_API ImDrawList* igGetForegroundDrawList_ViewportPtr(ImGuiViewport* viewport)
 {
-    return ImGui::GetForegroundDrawList();
+    return ImGui::GetForegroundDrawList(viewport);
 }
 CIMGUI_API bool igIsRectVisible_Nil(const ImVec2_c size)
 {
@@ -1921,8 +1907,6 @@ CIMGUI_API void igMemFree(void* ptr)
 {
     return ImGui::MemFree(ptr);
 }
-<<<<<<< ours
-=======
 CIMGUI_API void igUpdatePlatformWindows()
 {
     return ImGui::UpdatePlatformWindows();
@@ -1943,7 +1927,6 @@ CIMGUI_API ImGuiViewport* igFindViewportByPlatformHandle(void* platform_handle)
 {
     return ImGui::FindViewportByPlatformHandle(platform_handle);
 }
->>>>>>> theirs
 CIMGUI_API ImGuiTableSortSpecs* ImGuiTableSortSpecs_ImGuiTableSortSpecs(void)
 {
     return IM_NEW(ImGuiTableSortSpecs)();
@@ -1995,6 +1978,10 @@ CIMGUI_API void ImGuiIO_AddMouseWheelEvent(ImGuiIO* self,float wheel_x,float whe
 CIMGUI_API void ImGuiIO_AddMouseSourceEvent(ImGuiIO* self,ImGuiMouseSource source)
 {
     return self->AddMouseSourceEvent(source);
+}
+CIMGUI_API void ImGuiIO_AddMouseViewportEvent(ImGuiIO* self,ImGuiID id)
+{
+    return self->AddMouseViewportEvent(id);
 }
 CIMGUI_API void ImGuiIO_AddFocusEvent(ImGuiIO* self,bool focused)
 {
@@ -2071,6 +2058,14 @@ CIMGUI_API void ImGuiInputTextCallbackData_ClearSelection(ImGuiInputTextCallback
 CIMGUI_API bool ImGuiInputTextCallbackData_HasSelection(ImGuiInputTextCallbackData* self)
 {
     return self->HasSelection();
+}
+CIMGUI_API ImGuiWindowClass* ImGuiWindowClass_ImGuiWindowClass(void)
+{
+    return IM_NEW(ImGuiWindowClass)();
+}
+CIMGUI_API void ImGuiWindowClass_destroy(ImGuiWindowClass* self)
+{
+    IM_DELETE(self);
 }
 CIMGUI_API ImGuiPayload* ImGuiPayload_ImGuiPayload(void)
 {
@@ -3043,6 +3038,14 @@ CIMGUI_API void ImGuiPlatformIO_ClearPlatformHandlers(ImGuiPlatformIO* self)
 CIMGUI_API void ImGuiPlatformIO_ClearRendererHandlers(ImGuiPlatformIO* self)
 {
     return self->ClearRendererHandlers();
+}
+CIMGUI_API ImGuiPlatformMonitor* ImGuiPlatformMonitor_ImGuiPlatformMonitor(void)
+{
+    return IM_NEW(ImGuiPlatformMonitor)();
+}
+CIMGUI_API void ImGuiPlatformMonitor_destroy(ImGuiPlatformMonitor* self)
+{
+    IM_DELETE(self);
 }
 CIMGUI_API ImGuiPlatformImeData* ImGuiPlatformImeData_ImGuiPlatformImeData(void)
 {
@@ -4063,8 +4066,6 @@ CIMGUI_API void ImGuiMultiSelectState_destroy(ImGuiMultiSelectState* self)
 {
     IM_DELETE(self);
 }
-<<<<<<< ours
-=======
 CIMGUI_API ImGuiDockNode* ImGuiDockNode_ImGuiDockNode(ImGuiID id)
 {
     return IM_NEW(ImGuiDockNode)(id);
@@ -4129,7 +4130,6 @@ CIMGUI_API void ImGuiDockContext_destroy(ImGuiDockContext* self)
 {
     IM_DELETE(self);
 }
->>>>>>> theirs
 CIMGUI_API ImGuiViewportP* ImGuiViewportP_ImGuiViewportP(void)
 {
     return IM_NEW(ImGuiViewportP)();
@@ -4138,15 +4138,11 @@ CIMGUI_API void ImGuiViewportP_destroy(ImGuiViewportP* self)
 {
     IM_DELETE(self);
 }
-<<<<<<< ours
-CIMGUI_API void ImGuiViewportP_CalcWorkRectPos(ImVec2 *pOut,ImGuiViewportP* self,const ImVec2 inset_min)
-=======
 CIMGUI_API void ImGuiViewportP_ClearRequestFlags(ImGuiViewportP* self)
 {
     return self->ClearRequestFlags();
 }
 CIMGUI_API ImVec2_c ImGuiViewportP_CalcWorkRectPos(ImGuiViewportP* self,const ImVec2_c inset_min)
->>>>>>> theirs
 {
     return ConvertFromCPP_ImVec2(self->CalcWorkRectPos(ConvertToCPP_ImVec2(inset_min)));
 }
@@ -4386,9 +4382,9 @@ CIMGUI_API ImVec2_c igCalcWindowNextAutoFitSize(ImGuiWindow* window)
 {
     return ConvertFromCPP_ImVec2(ImGui::CalcWindowNextAutoFitSize(window));
 }
-CIMGUI_API bool igIsWindowChildOf(ImGuiWindow* window,ImGuiWindow* potential_parent,bool popup_hierarchy)
+CIMGUI_API bool igIsWindowChildOf(ImGuiWindow* window,ImGuiWindow* potential_parent,bool popup_hierarchy,bool dock_hierarchy)
 {
-    return ImGui::IsWindowChildOf(window,potential_parent,popup_hierarchy);
+    return ImGui::IsWindowChildOf(window,potential_parent,popup_hierarchy,dock_hierarchy);
 }
 CIMGUI_API bool igIsWindowInBeginStack(ImGuiWindow* window)
 {
@@ -4534,14 +4530,6 @@ CIMGUI_API ImDrawList* igGetForegroundDrawList_WindowPtr(ImGuiWindow* window)
 {
     return ImGui::GetForegroundDrawList(window);
 }
-CIMGUI_API ImDrawList* igGetBackgroundDrawList_ViewportPtr(ImGuiViewport* viewport)
-{
-    return ImGui::GetBackgroundDrawList(viewport);
-}
-CIMGUI_API ImDrawList* igGetForegroundDrawList_ViewportPtr(ImGuiViewport* viewport)
-{
-    return ImGui::GetForegroundDrawList(viewport);
-}
 CIMGUI_API void igAddDrawListToDrawDataEx(ImDrawData* draw_data,ImVector_ImDrawListPtr* out_list,ImDrawList* draw_list)
 {
     return ImGui::AddDrawListToDrawDataEx(draw_data,out_list,draw_list);
@@ -4586,6 +4574,10 @@ CIMGUI_API void igStartMouseMovingWindow(ImGuiWindow* window)
 {
     return ImGui::StartMouseMovingWindow(window);
 }
+CIMGUI_API void igStartMouseMovingWindowOrNode(ImGuiWindow* window,ImGuiDockNode* node,bool undock)
+{
+    return ImGui::StartMouseMovingWindowOrNode(window,node,undock);
+}
 CIMGUI_API void igStopMouseMovingWindow()
 {
     return ImGui::StopMouseMovingWindow();
@@ -4600,22 +4592,20 @@ CIMGUI_API void igUpdateMouseMovingWindowEndFrame()
 }
 CIMGUI_API void igTranslateWindowsInViewport(ImGuiViewportP* viewport,const ImVec2_c old_pos,const ImVec2_c new_pos,const ImVec2_c old_size,const ImVec2_c new_size)
 {
-<<<<<<< ours
-    return ImGui::CallContextHooks(context,type);
-=======
     return ImGui::TranslateWindowsInViewport(viewport,ConvertToCPP_ImVec2(old_pos),ConvertToCPP_ImVec2(new_pos),ConvertToCPP_ImVec2(old_size),ConvertToCPP_ImVec2(new_size));
->>>>>>> theirs
 }
 CIMGUI_API void igScaleWindowsInViewport(ImGuiViewportP* viewport,float scale)
 {
     return ImGui::ScaleWindowsInViewport(viewport,scale);
 }
+CIMGUI_API void igDestroyPlatformWindow(ImGuiViewportP* viewport)
+{
+    return ImGui::DestroyPlatformWindow(viewport);
+}
 CIMGUI_API void igSetWindowViewport(ImGuiWindow* window,ImGuiViewportP* viewport)
 {
     return ImGui::SetWindowViewport(window,viewport);
 }
-<<<<<<< ours
-=======
 CIMGUI_API void igSetCurrentViewport(ImGuiWindow* window,ImGuiViewportP* viewport)
 {
     return ImGui::SetCurrentViewport(window,viewport);
@@ -4628,7 +4618,6 @@ CIMGUI_API ImGuiViewportP* igFindHoveredViewportFromPlatformWindowStack(const Im
 {
     return ImGui::FindHoveredViewportFromPlatformWindowStack(ConvertToCPP_ImVec2(mouse_platform_pos));
 }
->>>>>>> theirs
 CIMGUI_API void igMarkIniSettingsDirty_Nil()
 {
     return ImGui::MarkIniSettingsDirty();
@@ -5173,8 +5162,6 @@ CIMGUI_API ImGuiKeyRoutingData* igGetShortcutRoutingData(ImGuiKeyChord key_chord
 {
     return ImGui::GetShortcutRoutingData(key_chord);
 }
-<<<<<<< ours
-=======
 CIMGUI_API void igDockContextInitialize(ImGuiContext* ctx)
 {
     return ImGui::DockContextInitialize(ctx);
@@ -5343,7 +5330,6 @@ CIMGUI_API void igDockBuilderFinish(ImGuiID node_id)
 {
     return ImGui::DockBuilderFinish(node_id);
 }
->>>>>>> theirs
 CIMGUI_API void igPushFocusScope(ImGuiID id)
 {
     return ImGui::PushFocusScope(id);
@@ -5716,6 +5702,10 @@ CIMGUI_API ImGuiTabItem* igTabBarFindTabByOrder(ImGuiTabBar* tab_bar,int order)
 {
     return ImGui::TabBarFindTabByOrder(tab_bar,order);
 }
+CIMGUI_API ImGuiTabItem* igTabBarFindMostRecentlySelectedTabForActiveWindow(ImGuiTabBar* tab_bar)
+{
+    return ImGui::TabBarFindMostRecentlySelectedTabForActiveWindow(tab_bar);
+}
 CIMGUI_API ImGuiTabItem* igTabBarGetCurrentTab(ImGuiTabBar* tab_bar)
 {
     return ImGui::TabBarGetCurrentTab(tab_bar);
@@ -5727,6 +5717,10 @@ CIMGUI_API int igTabBarGetTabOrder(ImGuiTabBar* tab_bar,ImGuiTabItem* tab)
 CIMGUI_API const char* igTabBarGetTabName(ImGuiTabBar* tab_bar,ImGuiTabItem* tab)
 {
     return ImGui::TabBarGetTabName(tab_bar,tab);
+}
+CIMGUI_API void igTabBarAddTab(ImGuiTabBar* tab_bar,ImGuiTabItemFlags tab_flags,ImGuiWindow* window)
+{
+    return ImGui::TabBarAddTab(tab_bar,tab_flags,window);
 }
 CIMGUI_API void igTabBarRemoveTab(ImGuiTabBar* tab_bar,ImGuiID tab_id)
 {
@@ -5844,15 +5838,11 @@ CIMGUI_API void igRenderArrowPointingAt(ImDrawList* draw_list,ImVec2_c pos,ImVec
 {
     return ImGui::RenderArrowPointingAt(draw_list,ConvertToCPP_ImVec2(pos),ConvertToCPP_ImVec2(half_sz),direction,col);
 }
-<<<<<<< ours
-CIMGUI_API void igRenderRectFilledRangeH(ImDrawList* draw_list,const ImRect rect,ImU32 col,float x_start_norm,float x_end_norm,float rounding)
-=======
 CIMGUI_API void igRenderArrowDockMenu(ImDrawList* draw_list,ImVec2_c p_min,float sz,ImU32 col)
 {
     return ImGui::RenderArrowDockMenu(draw_list,ConvertToCPP_ImVec2(p_min),sz,col);
 }
 CIMGUI_API void igRenderRectFilledInRangeH(ImDrawList* draw_list,const ImRect_c rect,ImU32 col,float fill_x0,float fill_x1,float rounding)
->>>>>>> theirs
 {
     return ImGui::RenderRectFilledInRangeH(draw_list,ConvertToCPP_ImRect(rect),col,fill_x0,fill_x1,rounding);
 }
@@ -5860,13 +5850,10 @@ CIMGUI_API void igRenderRectFilledWithHole(ImDrawList* draw_list,const ImRect_c 
 {
     return ImGui::RenderRectFilledWithHole(draw_list,ConvertToCPP_ImRect(outer),ConvertToCPP_ImRect(inner),col,rounding);
 }
-<<<<<<< ours
-=======
 CIMGUI_API ImDrawFlags igCalcRoundingFlagsForRectInRect(const ImRect_c r_in,const ImRect_c r_outer,float threshold)
 {
     return ImGui::CalcRoundingFlagsForRectInRect(ConvertToCPP_ImRect(r_in),ConvertToCPP_ImRect(r_outer),threshold);
 }
->>>>>>> theirs
 CIMGUI_API void igTextEx(const char* text,const char* text_end,ImGuiTextFlags flags)
 {
     return ImGui::TextEx(text,text_end,flags);
@@ -5920,15 +5907,9 @@ CIMGUI_API bool igCloseButton(ImGuiID id,const ImVec2_c pos)
 {
     return ImGui::CloseButton(id,ConvertToCPP_ImVec2(pos));
 }
-<<<<<<< ours
-CIMGUI_API bool igCollapseButton(ImGuiID id,const ImVec2 pos)
-{
-    return ImGui::CollapseButton(id,pos);
-=======
 CIMGUI_API bool igCollapseButton(ImGuiID id,const ImVec2_c pos,ImGuiDockNode* dock_node)
 {
     return ImGui::CollapseButton(id,ConvertToCPP_ImVec2(pos),dock_node);
->>>>>>> theirs
 }
 CIMGUI_API void igScrollbar(ImGuiAxis axis)
 {
@@ -6198,6 +6179,10 @@ CIMGUI_API void igDebugNodeColumns(ImGuiOldColumns* columns)
 {
     return ImGui::DebugNodeColumns(columns);
 }
+CIMGUI_API void igDebugNodeDockNode(ImGuiDockNode* node,const char* label)
+{
+    return ImGui::DebugNodeDockNode(node,label);
+}
 CIMGUI_API void igDebugNodeDrawList(ImGuiWindow* window,ImGuiViewportP* viewport,const ImDrawList* draw_list,const char* label)
 {
     return ImGui::DebugNodeDrawList(window,viewport,draw_list,label);
@@ -6269,6 +6254,10 @@ CIMGUI_API void igDebugNodeWindowsListByBeginStackParent(ImGuiWindow** windows,i
 CIMGUI_API void igDebugNodeViewport(ImGuiViewportP* viewport)
 {
     return ImGui::DebugNodeViewport(viewport);
+}
+CIMGUI_API void igDebugNodePlatformMonitor(ImGuiPlatformMonitor* monitor,const char* label,int idx)
+{
+    return ImGui::DebugNodePlatformMonitor(monitor,label,idx);
 }
 CIMGUI_API void igDebugRenderKeyboardPreview(ImDrawList* draw_list)
 {
